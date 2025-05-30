@@ -1,9 +1,15 @@
+/*
+Aluno: Alexsandro Almeida Bomfim
+matricula: 202310347
+Docente: Vânia (mãe)
+Pokemon - Togepi
+*/
+
 #include <GL/glut.h> //O arquivo glut.h inclui, além dos protótipos das funções GLUT, os arquivos gl.h e glu.h
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
 #define PI 3.1415926535
-int R = 0, G = 0, B = 0;
 
 float posX = 0.0f, posY = 0.0f;
 float escala = 1.0f;
@@ -29,6 +35,7 @@ void drawCircle(float centroX, float centroY, float raio, int numLados);
 void drawEllipse(float centroX, float centroY, float raioX, float raioY, int numLados);
 void semiCirculo(float centroX, float centroY, float raioX, float raioY, int numLados);
 void tecladoEspecial(int tecla, int x, int y);
+void cenarioPokemonStyle();
 
 int main(int argc, char **argv)
 {
@@ -50,14 +57,17 @@ int main(int argc, char **argv)
 void display(void)
 {
   glClear(GL_COLOR_BUFFER_BIT);
-  glPushMatrix();
 
+  // Desenha o cenário fixo
+  cenarioPokemonStyle();
+
+  // Aplica transformações apenas ao Togepi
+  glPushMatrix();
   glTranslatef(posX, posY, 0.0f);
   glScalef(escala, escala, 1.0f);
-  
   togepi();
-
   glPopMatrix();
+
   glFlush();
 }
 
@@ -89,7 +99,8 @@ void drawCircle(float centroX, float centroY, float raio, int numLados)
   }
   glEnd();
 
-  glColor4fv(corAtual); // restaura cor
+  // Restaura cor
+  glColor4fv(corAtual);
 }
 
 void drawEllipse(float centroX, float centroY, float raioX, float raioY, int numLados)
@@ -455,4 +466,53 @@ void tecladoEspecial(int tecla, int x, int y)
     break;
 }
   glutPostRedisplay();
+}
+
+void cenarioPokemonStyle() {
+    // Céu
+    glColor3f(0.53f, 0.81f, 0.98f); // Azul do céu
+    glBegin(GL_QUADS);
+        glVertex2f(-1.0f, -1.0f);
+        glVertex2f( 1.0f, -1.0f);
+        glVertex2f( 1.0f,  1.0f);
+        glVertex2f(-1.0f,  1.0f);
+    glEnd();
+
+    // Mata/grama
+    glColor3f(0.0f, 0.6f, 0.0f); // Verde da grama
+    glBegin(GL_QUADS);
+        glVertex2f(-1.0f, -1.0f);
+        glVertex2f( 1.0f, -1.0f);
+        glVertex2f( 1.0f, -0.4f);
+        glVertex2f(-1.0f, -0.4f);
+    glEnd();
+
+    // Nuvens
+    glColor3f(1.0f, 1.0f, 1.0f);
+    drawEllipse(-0.7f, 0.7f, 0.15f, 0.07f, 50);
+    drawEllipse(-0.6f, 0.75f, 0.10f, 0.05f, 50);
+    drawEllipse(0.0f, 0.8f, 0.12f, 0.06f, 50);
+    drawEllipse(0.1f, 0.75f, 0.08f, 0.04f, 50);
+    drawEllipse(0.6f, 0.6f, 0.13f, 0.06f, 50);
+    drawEllipse(0.7f, 0.65f, 0.09f, 0.04f, 50);
+
+    // Árvores
+    // Tronco
+    glColor3f(0.29f, 0.2f, 0.0f);
+    glBegin(GL_QUADS);
+        glVertex2f(-0.8f, -0.4f);
+        glVertex2f(-0.8f, -0.1f);
+        glVertex2f(-0.75f, -0.1f);
+        glVertex2f(-0.75f, -0.4f);
+    glEnd();
+    glBegin(GL_QUADS);
+        glVertex2f(0.7f, -0.4f);
+        glVertex2f(0.7f, -0.05f);
+        glVertex2f(0.75f, -0.05f);
+        glVertex2f(0.75f, -0.4f);
+    glEnd();
+    // Folhas
+    glColor3f(0.13f, 0.55f, 0.13f);
+    drawEllipse(-0.775f, -0.05f, 0.07f, 0.10f, 50);
+    drawEllipse(0.725f, 0.0f, 0.08f, 0.11f, 50);
 }
