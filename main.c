@@ -395,14 +395,14 @@ void pes()
     // Pé esquerdo
   glPushMatrix();
   glTranslatef(-0.2f, -0.45f, 0.0f);
-  glRotatef(rotacaoPeEsq, 0.0f, 0.0f, 1.0f);  // pé esquerdo
+  glRotatef(rotacaoPeEsq, 0.0f, 0.0f, 2.0f);  // pé esquerdo
   drawEllipse(0.0f, 0.0f, 0.08f, 0.04f, 50);
   glPopMatrix();
 
     // Pé direito
   glPushMatrix();
   glTranslatef(0.2f, -0.45f, 0.0f);
-  glRotatef(rotacaoPeDir, 0.0f, 0.0f, 1.0f);  // pé direito
+  glRotatef(rotacaoPeDir, 0.0f, 0.0f, 2.0f);  // pé direito
   drawEllipse(0.0f, 0.0f, 0.08f, 0.04f, 50);
   glPopMatrix();
 }
@@ -561,7 +561,7 @@ void animacao(int valor) {
 
   if (fase == 0) { // Crescendo
     if (escala < 1.0f) {
-      escala       += 0.005f;
+      escala       += 0.015f;
       rotacaoPeEsq  = sin(frame * 0.2f) * 10.0f;  // Movimento vertical
       rotacaoPeDir  = sin(frame * 0.2f) * 10.0f;  // Movimento vertical
     } else {
@@ -581,7 +581,7 @@ void animacao(int valor) {
   else if (fase == 2) { // Dança
     offsetPulo      = sin(frame * 0.2f) * 0.05f;
     anguloPuloBraco = sin(frame * 0.2f) * 30.0f;
-    rotacaoPeEsq    = sin(frame * 0.1f) * 10.0f;  // Movimento vertical
+    rotacaoPeEsq    = sin(frame * 0.2f) * 10.0f;  // Movimento vertical
     rotacaoPeDir    = -rotacaoPeEsq;              // Movimento vertical
   }
 
